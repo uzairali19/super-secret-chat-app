@@ -49,14 +49,14 @@ const Header: React.FC<HeaderProps> = ({
         <div className="normal-case text-xl">
           Super Secret Chat{loggedIn ? "," : null}
           <span className="capitalize text-sm pl-1">
-            {loggedIn ? `logged in as ${capitalCase(username)}` : null}
+            {loggedIn ? `Logged in as ${capitalCase(username)}` : null}
           </span>
         </div>
       </div>
       <div className="navbar-end">
         <Theme themeType="toggle" theme={theme} setTheme={setTheme} />
         {loggedIn ? (
-          <button className="btn btn-ghost" onClick={logout}>
+          <button className="btn btn-ghost uppercase" onClick={logout}>
             Logout
           </button>
         ) : null}

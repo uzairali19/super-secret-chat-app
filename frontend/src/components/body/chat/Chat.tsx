@@ -133,7 +133,7 @@ const Chat: React.FC<ChatProps> = ({ username, userId, messages }) => {
   };
 
   const capitalCase = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
   useEffect(() => {
@@ -245,7 +245,7 @@ const Chat: React.FC<ChatProps> = ({ username, userId, messages }) => {
           )}
           {!showEditMessage.show && (
             <button
-              className="btn btn-success absolute right-2 bottom-4 h-8 min-h-0 px-14 py-0 text-xs"
+              className="btn btn-success absolute right-2 bottom-4 h-8 min-h-0 px-14 py-0 text-xs capitalize rounded-xl"
               onClick={sendMessage}
             >
               Send

@@ -163,31 +163,31 @@ io.on("connection", (socket: any) => {
       time: data.time,
     };
     db.messages.push(messageData);
-    socket.to(ROOM_NAME).emit("receive_message", messageData);
+    io.to(ROOM_NAME).emit("receive_message", messageData); // Emit to all clients in the room
   });
 
   socket.on("delete_message", (data: any) => {
     const { id, time, edited, message } = data;
-    db.messages.forEach((m: any) => {
+    db.messages.forEach((m) => {
       if (m.id === id) {
         m.message = message;
         m.time = time;
         m.edited = edited;
       }
     });
-    socket.to(ROOM_NAME).emit("delete_message", data);
+    io.to(ROOM_NAME).emit("delete_message", { messages: db.messages }); // Emit to all clients in the room
   });
 
   socket.on("edit_message", (data: any) => {
     const { id, message, edited, time } = data;
-    db.messages.forEach((m: any) => {
+    db.messages.forEach((m) => {
       if (m.id === id) {
         m.message = message;
         m.edited = edited;
         m.time = time;
       }
     });
-    socket.to(ROOM_NAME).emit("edit_message", data);
+    io.to(ROOM_NAME).emit("edit_message", { messages: db.messages }); // Emit to all clients in the room
   });
 });
 

@@ -6,12 +6,12 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3001");
 
 const App: React.FC = () => {
-  const [theme, setTheme] = useState("basic");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "basic");
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string>("");
-  const [messages, setMessages] = useState<any>([]);
+  const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -34,6 +34,26 @@ const App: React.FC = () => {
     fetchData()
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      setMessages((prevMessages) => [...prevMessages, data]);
+    });
+
+    socket.on("delete_message", (data) => {
+      setMessages(data.messages);
+    });
+
+    socket.on("edit_message", (data) => {
+      setMessages(data.messages);
+    });
+
+    return () => {
+      socket.off("receive_message");
+      socket.off("delete_message");
+      socket.off("edit_message");
+    };
   }, []);
 
   return loading ? (
