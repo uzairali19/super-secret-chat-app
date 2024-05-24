@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { ThemeChildProps } from "../../types";
 
 const Toggle: React.FC<ThemeChildProps> = ({ theme, setTheme }) => {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const handleToggle = () => {
-    setTheme?.(theme === "years" ? "dark" : "years");
+    setTheme?.(theme === "basic" ? "dark" : "basic");
   };
-  
+
   useEffect(() => {
     if (prefersDark) {
       setTheme?.("dark");
@@ -31,6 +31,6 @@ const Toggle: React.FC<ThemeChildProps> = ({ theme, setTheme }) => {
       </svg>
     </label>
   );
-}
+};
 
 export default Toggle;

@@ -10,7 +10,7 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        "years": {
+        "basic": {
           "primary": "#ff9f00",
           "secondary": "#93f298",
           "accent": "#0084fe",

@@ -8,8 +8,7 @@ services:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "5001:5000" # Changed external port to 5001
-      - "6006:6006" # Storybook
+      - "3000:3000" # Adjusted external port to 3000 to match backend
     environment:
       - NODE_ENV=development
     command: ["yarn", "start"]
@@ -21,7 +20,7 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "3001:3000" # Changed external port to 3001
+      - "3001:3001" # Adjusted external port to 3001 to match backend
     environment:
       - NODE_ENV=development
     command: ["yarn", "run", "dev"]

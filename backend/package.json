@@ -1,8 +1,8 @@
 {
-  "name": "yearschat",
+  "name": "supersecretchat",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/uzairali19/yearschat-assessment.git",
+  "repository": "https://github.com/uzairali19/template-chat-app.git",
   "author": "uzairali19 <uzairali19b@gmail.com>",
   "license": "MIT",
   "scripts": {

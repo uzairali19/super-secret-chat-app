@@ -48,7 +48,7 @@ const Welcome: React.FC<WelcomeProps> = ({
 
   return (
     <div className="container flex justify-center min-h-screen flex-col mx-auto items-center">
-      <h1 className="text-2xl">Welcome to Years Chat</h1>
+      <h1 className="text-2xl">Welcome to Super Secret Chat APP</h1>
       <h3 className="text-sm my-5">
         Please enter your name below and click "Login"
       </h3>

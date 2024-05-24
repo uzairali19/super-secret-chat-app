@@ -1,7 +1,6 @@
-# Years Chat Assessment
+# Super Secret Chat APP
 
-> This is a Chat Application for Years Chat Assessment, Users can join a room, chat, edit and delete messages. However other users do get notify due to that. Have fun Chatting!!
-
+> This is a Super Secret Chat APP, Users can join a room, chat, edit and delete messages. However other users do get notify due to that. Have fun Chatting!!
 
 ## Built With
 
@@ -16,12 +15,10 @@ To get a local copy up and running follow these simple example steps:
 
 ### Setup
 
-- To get a local copy of the project open terminal
-- run `git clone https://github.com/uzairali19/yearschat-assessment.git yearschat-client`
-- run `git clone https://github.com/uzairali19/yearschat-assessment.git yearschat-server`
-- Then run `cd yearschat-client && git checkout frontend && yarn && yarn dev`
-- In a new terminal window run `cd yearschat-server && git checkout backend && yarn && yarn dev`
-- Navigate to `http://localhost:3000` on a browser open in incognito too, have fun!!
+## With Docker
+
+## Without Docker
+
 ## Authors
 
 👤 **Uzair Ali**
@@ -34,7 +31,7 @@ To get a local copy up and running follow these simple example steps:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/uzairali19/yearschat-assessment/issues/).
+Feel free to check the [issues page](https://github.com/uzairali19/template-chat-app/issues/).
 
 ## Show your support
 

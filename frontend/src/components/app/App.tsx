@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3001");
 
 const App: React.FC = () => {
-  const [theme, setTheme] = useState("years");
+  const [theme, setTheme] = useState("basic");
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);

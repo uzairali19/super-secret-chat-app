@@ -1,1 +1,1 @@
-# yearschat-assessment
+# Super Secret Chat APP (Frontend)

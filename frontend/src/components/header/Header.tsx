@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({
     <StyledHeader>
       <div className="navbar-start">
         <div className="normal-case text-xl">
-          Years Chat{loggedIn ? "," : null}
+          Super Secret Chat{loggedIn ? "," : null}
           <span className="capitalize text-sm pl-1">
             {loggedIn ? `logged in as ${capitalCase(username)}` : null}
           </span>
