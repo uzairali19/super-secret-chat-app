@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { ChatProps } from "../../types";
 import { v4 as uuidv4 } from "uuid";
 import { ChatInput } from "./StyledChatComponents";
+import { io, Socket } from "socket.io-client";
 
-const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
+const Chat: React.FC<ChatProps> = ({ username, userId, messages }) => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState(messages);
   const [showMessageOptions, setShowMessageOptions] = useState({
@@ -15,14 +16,7 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
     id: "",
   });
   const scrollView = useRef<any>(null);
-  const [error, setError] = useState({
-    error: false,
-    message: "",
-  });
-
-  useEffect(() => {
-    scrollView.current.scrollTop = scrollView.current.scrollHeight;
-  }, [messageList]);
+  const [socket, setSocket] = useState<Socket | null>(null);
 
   const timeAmPm = (time: string) => {
     const timeArr = time.split(":");
@@ -33,7 +27,7 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
     } else {
       return `${hour}:${minutes} AM`;
     }
-  }
+  };
 
   const handleMessageClick = (e: any) => {
     e.preventDefault();
@@ -67,7 +61,7 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
       body: JSON.stringify({
         id: messageId,
         time: timeAmPm(new Date().toLocaleTimeString()),
-        edited: false
+        edited: false,
       }),
     })
       .then((res) => res.json())
@@ -75,7 +69,7 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
         if (data) {
           setMessageList(data.messages);
           setShowMessageOptions({ show: false, id: "" });
-          socket.emit("delete_message", data);
+          socket?.emit("delete_message", data);
         }
       });
   };
@@ -101,7 +95,7 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
         userId,
         time: timeAmPm(new Date().toLocaleTimeString()),
       };
-      await socket.emit("send_message", data);
+      await socket?.emit("send_message", data);
       setMessageList((messageList: any) => [...messageList, data]);
       setMessage("");
     }
@@ -127,7 +121,7 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
           if (data) {
             setMessageList(data.messages);
             setShowMessageOptions({ show: false, id: "" });
-            socket.emit("edit_message", data);
+            socket?.emit("edit_message", data);
           }
         });
     }
@@ -144,16 +138,27 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
 
   useEffect(() => {
     setMessageList(messages);
-    socket.on("receive_message", (data: any) => {
+    const newSocket = io("http://localhost:3001");
+    setSocket(newSocket);
+
+    newSocket.on("receive_message", (data: any) => {
       setMessageList((messageList: any) => [...messageList, data]);
     });
-    socket.on("delete_message", (data: any) => {
+    newSocket.on("delete_message", (data: any) => {
       setMessageList(data.messages);
     });
-    socket.on("edit_message", (data: any) => {
+    newSocket.on("edit_message", (data: any) => {
       setMessageList(data.messages);
     });
-  }, [socket]);
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, [messages]);
+
+  useEffect(() => {
+    scrollView.current.scrollTop = scrollView.current.scrollHeight;
+  }, [messageList]);
 
   return (
     <div className="container mx-auto flex flex-col justify-between min-h-[74vh] h-[100px] mt-2">
@@ -168,18 +173,19 @@ const Chat: React.FC<ChatProps> = ({ socket, username, userId, messages }) => {
                 }`}
               >
                 <div className="chat-header">
-                  {message.username ? capitalCase(message.username): null},
+                  {message.username ? capitalCase(message.username) : null},
                   {message.edited ? " Edited at" : null}
                   <time className="pl-1 text-xs opacity-50">
                     {message.time}
                   </time>
                 </div>
-                <div className={`chat-bubble relative pr-7 min-w-[200px] text-white
-                ${
-                  message.userId === userId ? "bg-accent" : "bg-neutral"
-                }`}>
+                <div
+                  className={`chat-bubble relative pr-7 min-w-[200px] text-white
+                ${message.userId === userId ? "bg-accent" : "bg-neutral"}`}
+                >
                   {message.message}
-                  {message.message != "This message has been deleted" && message.userId === userId ? (
+                  {message.message !== "This message has been deleted" &&
+                  message.userId === userId ? (
                     <span
                       className="absolute right-2 top-1 hover:cursor-pointer hover:opacity-70"
                       id={message.id}

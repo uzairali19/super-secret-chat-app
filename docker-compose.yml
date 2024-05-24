@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5001:5000" # Changed external port to 5001
+      - "6006:6006" # Storybook
+    environment:
+      - NODE_ENV=development
+    command: ["yarn", "start"]
+
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3001:3000" # Changed external port to 3001
+    environment:
+      - NODE_ENV=development
+    command: ["yarn", "run", "dev"]
