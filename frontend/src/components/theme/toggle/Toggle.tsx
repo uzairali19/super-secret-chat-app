@@ -26,7 +26,7 @@ const Toggle: React.FC<ThemeChildProps> = ({ theme, setTheme }) => {
         sun: "swap-off",
       });
     }
-  }, [themeName]);
+  }, []);
 
   return (
     <label className="swap swap-rotate">

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const StyledInput = styled.input.attrs({
   className: "input",
-  placeholderTextColor: "black",
 })`
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -11,6 +10,10 @@ const StyledInput = styled.input.attrs({
   font-size: 16px;
   background-color: #f2f2f7;
   margin-bottom: 10px;
+  color: #000;
+  ::placeholder {
+    color: #000;
+  }
 `;
 
 const LoginInput: React.FC<LoginInputProps> = ({
