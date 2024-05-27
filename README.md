@@ -23,7 +23,14 @@ To get a local copy up and running follow these simple example steps:
 ## Without Docker
 
 - `git clone https://github.com/uzairali19/super-secret-chat-app.git`
-- `cd super-secret-chat-app/frontend && `
+- `cd super-secret-chat-app && npm install`
+- `npm run start`
+
+## Running the app
+
+- Open `http://localhost:3000/` on a browser window
+- Open `http://localhost:3000/` on an incognito window
+- You will have two instances of the chat on two different windows skip between them, have fun chatting!!!
 
 ## Authors
 
