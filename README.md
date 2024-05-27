@@ -13,14 +13,14 @@
 
 To get a local copy up and running follow these simple example steps:
 
-### Setup
+# Setup
 
 ## With Docker
 
 - `git clone https://github.com/uzairali19/super-secret-chat-app.git`
 - `cd super-secret-chat-app && docker-compose up -build`
 
-## Without Docker
+## Without Docker
 
 - `git clone https://github.com/uzairali19/super-secret-chat-app.git`
 - `cd super-secret-chat-app && npm install`
