@@ -1,0 +1,14 @@
+{
+  "name": "super-secret-chat-app",
+  "version": "1.0.0",
+  "description": "> This is a Super Secret Chat APP, Users can join a room, chat, edit and delete messages. However other users do get notify due to that. Have fun Chatting!!",
+  "scripts": {
+    "install": "npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "start": "npm run start:backend & npm run start:frontend",
+    "start:backend": "cd backend && npm run serve",
+    "start:frontend": "cd frontend && npm build"
+  },
+  "author": "Uzair Ali"
+}

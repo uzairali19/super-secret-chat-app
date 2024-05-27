@@ -17,10 +17,13 @@ To get a local copy up and running follow these simple example steps:
 
 ## With Docker
 
-- `git clone https://github.com/uzairali19/template-chat-app.git`
-- `cd template-chat-app && docker-compose up -build`
+- `git clone https://github.com/uzairali19/super-secret-chat-app.git`
+- `cd super-secret-chat-app && docker-compose up -build`
 
 ## Without Docker
+
+- `git clone https://github.com/uzairali19/super-secret-chat-app.git`
+- `cd super-secret-chat-app/frontend && `
 
 ## Authors
 
